@@ -82,24 +82,41 @@ This choice was made due to being designed for the server. In [node.js][], we ne
 
 Returns:
 
-- ChildKlass `BackboneModel`, `Model` extended from `ModelKlass`
+- ChildModel `BackboneModel`, `Model` extended from `ModelKlass`
 
-#### `ChildKlass#initialize(attrs, options)`
-Method run when a `ChildKlass` is being instantiated
+#### `ChildModel#initialize(attrs, options)`
+Method run when a `ChildModel` is being instantiated
 
-http://backbonejs.org/#Model-constructor
+Original documentation: http://backbonejs.org/#Model-constructor
 
-- attrs `Object|null`, attributes passed in to `new ChildKlass(attrs, options)` call
+- attrs `Object|null`, attributes passed in to `new ChildModel(attrs, options)` call
 - options `Object|null`, parameters to adjust model behavior
     - apiClient `Object`, instance of an API client to interact with a given API
         - This is not asserted against but it is required for any remote calls (e.g. `save`, `fetch`)
 
 ```js
-var model = new ChildKlass(null, {
+var model = new ChildModel(null, {
   // Required for any remote calls (e.g. `save`, `fetch`)
   apiClient: apiClient
 });
 ```
+
+#### `ChildModel#fetch(options, cb)`
+Method to fetch external data via API client
+
+Original documentation: http://backbonejs.org/#Model-fetch
+
+- options `Object|null`, parameters to pass to [`ChildModel#sync`][]
+    - data `Object`, optional object of data to send instead of `Backbone's` defaults
+    - attrs `Object`, optional object of data to send (only used for `create`, `update`, or `patch` requests)
+- cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `fetch` results
+    - err `Error|null`, error if any occurred during fetch
+        - This include any errors that the API client replied with
+    - model `ChildModel`, instance of `ChildModel` that was fetched with
+    - resp `Objet`, response that was received from call
+    - options `Object`, options used on `apiClient`
+
+[`ChildModel#sync`]: #childmodelsyncmethod-model-options
 
 ## Examples
 _(Coming soon)_

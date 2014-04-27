@@ -350,7 +350,27 @@ this.apiClient[method](this.resourceName, options, cb);
 ```
 
 ## Examples
-_(Coming soon)_
+Since the existing `callApiClient` method does not fill API clients, we are providing sample solutions.
+
+### Method map
+If the naming convention for methods is inconsistent across resources, a method map is a great way to smooth that out.
+
+```js
+// Interacting with issue comments via the GitHub module
+var CommentModel = GithubModel.extend({
+  methodMap:
+});
+```
+
+### Bloated `callApiClient` logic
+If you are performng multiple actions in your `callApiClient` (e.g. add `id` in `update`, mark `deleted` attribute on `delete`), you can break that down by invoking methods which are overwritable on a one-off basis.
+
+```
+_create
+_read
+```
+
+
 
 // TODO: Decided to relocate this into `callApiClient` with README examples
 // TODO: Add examples in README about uses `_create/_update/etc` methods

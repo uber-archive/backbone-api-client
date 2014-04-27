@@ -32,7 +32,6 @@ var GithubModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
 
     // Find the corresponding resource method and call it
     var method = this.methodMap[methodKey];
-    var that = this;
     return this.apiClient[this.resourceName][method](params, cb);
   }
 });
@@ -367,7 +366,6 @@ var GithubModel = ApiModel.extend({
 
     // Find the corresponding resource method and call it
     var method = this.methodMap[methodKey];
-    var that = this;
     return this.apiClient[this.resourceName][method](params, cb);
   }
 });
@@ -394,16 +392,50 @@ var RepoModel = GithubModel.extend({
 ### Bloated `callApiClient` logic
 If you are performng multiple actions in your `callApiClient` (e.g. add `id` in `update`, mark `deleted` attribute on `delete`), you can break that down by invoking methods which are overwritable on a one-off basis.
 
+```js
+var GithubModel = ApiModel.extend({
+  callApiClient: function (methodKey, options, cb) {
+    // Prepare headers with data
+    var params = _.clone(options.data) || {};
+    if (options.headers) {
+      params.headers = options.headers;
+    }
+
+    // Call the corresponding _method (e.g. `_read`, `_create`)
+    return this['_' + method](params, cb);
+  },
+  // Set up default _methods
+  _create: function (params, cb) {
+    return this.apiClient[this.resourceName].create(params, cb);
+  },
+  _update: function (params, cb) {
+    var params = _.extend({
+      id: this.id
+    }, params);
+    return this.apiClient[this.resourceName].update(params, cb);
+  },
+  _read: function (params, cb) {
+    return this.apiClient[this.resourceName].read(params, cb);
+  },
+  _delete: function (params, cb) {
+    var that = this;
+    return this.apiClient[this.resourceName]['delete'](params, function (err, res) {
+      // If there is an error, callback with it
+      if (err) {
+        return cb(err);
+      }
+
+      // If the request was successful, mark the model as deleted
+      if (res.meta.status === '204 No Content') {
+        that.set('deleted', true);
+      }
+
+      // Callback as per usual
+      cb(null, res);
+    });
+  }
+});
 ```
-_create
-_read
-```
-
-
-
-// TODO: Decided to relocate this into `callApiClient` with README examples
-// TODO: Add examples in README about uses `_create/_update/etc` methods
-
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint via [grunt](https://github.com/gruntjs/grunt) and test via `npm test`.

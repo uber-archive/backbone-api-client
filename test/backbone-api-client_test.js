@@ -18,6 +18,9 @@ var GithubModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
     return this.apiClient[this.resourceName][method](params, cb);
   }
 });
+var GithubCollection = BackboneApiClient.mixinCollection(Backbone.Collection).extend({
+  callApiClient: GithubModel.prototype.callApiClient
+});
 var UserModel = GithubModel.extend({
   // https://developer.github.com/v3/issues/comments/
   // http://mikedeboer.github.io/node-github/#user
@@ -35,7 +38,15 @@ var CommentModel = GithubModel.extend({
   methodMap: {
     create: 'createComment',
     'delete': 'deleteCommment'
-  },
+  }
+});
+var IssueCollection = GithubCollection.extend({
+  // https://developer.github.com/v3/issues/
+  // http://mikedeboer.github.io/node-github/#issues.prototype.repoIssues
+  resourceName: 'issues',
+  methodMap: {
+    read: 'repoIssues'
+  }
 });
 
 // Define a set of utilities to instantiate new models easily

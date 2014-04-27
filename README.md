@@ -106,8 +106,14 @@ Method to retrieve item/updates via API client
 
 Original documentation: http://backbonejs.org/#Model-fetch
 
+Alternative invocations:
+
+```js
+model.fetch(cb);
+```
+
 - options `Object|null`, parameters to pass to [`ChildModel#sync`][]
-    - data `Object`, optional object of data to send instead of `Backbone's` defaults
+    - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `model.toJSON`)
 - cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `fetch` results
     - err `Error|null`, error if any occurred during fetch
         - This include any errors that the API client replied with
@@ -122,15 +128,20 @@ Method to create/update resource via API client
 
 Original documentation: http://backbonejs.org/#Model-save
 
-There are a few ways to invoke `save` but they all boil down the same result
+Alternative invocations:
 
 ```js
-model.save(attrs, [options], cb); // Invoke with object of updates
-model.save(key, val, [options], cb); // Update exactly one attribute (key)
-model.save(cb); // Invoke with no options or attributes
+model.save(attrs, cb);
+model.save(cb);
 ```
 
+- attrs `Object|null`, attributes to update on the model
+- options `Object|null`, parameters to pass to [`ChildModel#sync`][]
+    - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `attrs`)
+- cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `save` results
+    - Same properties as [`ChildModel#fetch's cb`][model-fetch]
 
+[model-fetch]: #childmodelfetchoptions-cb
 
 #### sync
   - attrs `Object`, optional object of data to send (only used for `create`, `update`, or `patch` requests)

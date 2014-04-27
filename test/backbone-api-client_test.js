@@ -1,11 +1,12 @@
 var Backbone = require('backbone');
-var GitHubApi = require('github');
 var expect = require('chai').expect;
 var BackboneApiClient = require('../');
+var githubUtils = require('./utils/github');
 
 // TODO: Use eightTrack/express/http in front of GitHub
 
 describe('A BackboneApiClient-mixed model using GitHub\'s API client', function () {
+  githubUtils.createClient();
   before(function createGitHubUser () {
     // Generate a UserModel
     var UserModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
@@ -21,16 +22,8 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
     });
 
     // Generate our user
-    var apiClient = new GitHubApi({
-      version: '3.0.0'
-    });
-    apiClient.authenticate({
-      type: 'basic',
-      username: 'twolfsontest',
-      password: 'password1234'
-    });
-    this.user = new UserModel({}, {
-      apiClient: apiClient
+    this.user = new UserModel({/* no attributes */}, {
+      apiClient: this.apiClient
     });
   });
   after(function cleanupGitHubUser () {

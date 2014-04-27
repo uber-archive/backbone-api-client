@@ -2,7 +2,8 @@
 
 Backbone mixin built for interacting with API clients
 
-TAKE CARE OF TODOS
+// TODO: Decided to relocate this into `callApiClient` with README examples
+// TODO: Add examples in README about uses `_create/_update/etc` methods
 
 ## Getting Started
 Install the module with: `npm install backbone-api-client`

@@ -5,11 +5,25 @@ var BackboneApiClient = require('../');
 var FakeGitHub = require('./utils/fake-github');
 var githubUtils = require('./utils/github');
 
+var apiModelUtils = {
+  createUser: function () {
+    before(function createUser () {
+      // Generate our user
+      this.user = new this.UserModel({/* no attributes */}, {
+        apiClient: this.apiClient
+      });
+    });
+    after(function cleanupUser () {
+      delete this.user;
+    });
+  }
+};
+
 describe('A BackboneApiClient-mixed model using GitHub\'s API client', function () {
   githubUtils.createClient();
-  before(function createGitHubUser () {
+  before(function createModel () {
     // Generate a UserModel
-    var UserModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
+    this.UserModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
       resourceName: 'user',
       // DEV: Technically, this would be part of a GitHubModel but this is compressed for testing
       callApiClient: function (method, options, cb) {
@@ -20,17 +34,13 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
         }
       }
     });
-
-    // Generate our user
-    this.user = new UserModel({/* no attributes */}, {
-      apiClient: this.apiClient
-    });
   });
-  after(function cleanupGitHubUser () {
-    delete this.user;
+  after(function cleanupModel () {
+    delete this.UserModel;
   });
 
   describe('fetching data', function () {
+    apiModelUtils.createUser();
     FakeGitHub.run();
     before(function fetchUserData (done) {
       var that = this;
@@ -44,6 +54,7 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
 
   // Simulate a downed server (by not running FakeGitHub) and verify we get back errors
   describe('failing to retrieve data', function () {
+    apiModelUtils.createUser();
     before(function fetchUserData (done) {
       var that = this;
       this.user.fetch(function saveError (err, userModel, userInfo) {

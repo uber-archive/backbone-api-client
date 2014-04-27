@@ -102,13 +102,12 @@ var model = new ChildModel(null, {
 ```
 
 #### `ChildModel#fetch(options, cb)`
-Method to fetch external data via API client
+Method to retrieve item/updates via API client
 
 Original documentation: http://backbonejs.org/#Model-fetch
 
 - options `Object|null`, parameters to pass to [`ChildModel#sync`][]
     - data `Object`, optional object of data to send instead of `Backbone's` defaults
-    - attrs `Object`, optional object of data to send (only used for `create`, `update`, or `patch` requests)
 - cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `fetch` results
     - err `Error|null`, error if any occurred during fetch
         - This include any errors that the API client replied with
@@ -117,6 +116,25 @@ Original documentation: http://backbonejs.org/#Model-fetch
     - options `Object`, options used on `apiClient`
 
 [`ChildModel#sync`]: #childmodelsyncmethod-model-options
+
+#### `ChildModel#save(attrs, options, cb)`
+Method to create/update resource via API client
+
+Original documentation: http://backbonejs.org/#Model-save
+
+There are a few ways to invoke `save` but they all boil down the same result
+
+```js
+model.save(attrs, [options], cb); // Invoke with object of updates
+model.save(key, val, [options], cb); // Update exactly one attribute (key)
+model.save(cb); // Invoke with no options or attributes
+```
+
+
+
+#### sync
+  - attrs `Object`, optional object of data to send (only used for `create`, `update`, or `patch` requests)
+
 
 ## Examples
 _(Coming soon)_

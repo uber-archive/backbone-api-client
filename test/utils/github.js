@@ -5,6 +5,7 @@ var GitHubApi = require('github');
 exports._createClient = function () {
   var apiClient = new GitHubApi({
     version: '3.0.0',
+    protocol: 'http',
     host: 'localhost',
     port: 1337
   });

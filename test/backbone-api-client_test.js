@@ -20,10 +20,11 @@ var UserModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
     }
 
     // Prepare headers with data and send request
-    var params = _.clone(options.data);
+    var params = _.clone(options.data) || {};
     if (options.headers) {
       params.headers = options.headers;
     }
+    console.log(options, params);
     return this.apiClient[this.resourceName][method](params, cb);
   }
 });
@@ -74,9 +75,7 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
     before(function fetchUserData (done) {
       var that = this;
       this.user.save({
-        attrs: {
-          bio: 'Hello World'
-        }
+        bio: 'Hello World'
       }, done);
     });
 

@@ -144,6 +144,7 @@ model.save(cb);
     - Same properties as [`ChildModel#fetch's cb`][model-fetch]
 
 [model-fetch]: #childmodelfetchoptions-cb
+[`ChildModel#callApiClient`]: #childmodelcallapiclientmethod-options-cb
 
 #### `ChildModel#destroy(options, cb)`
 Method to destroy resource via API client
@@ -282,6 +283,7 @@ collection.fetch(cb);
     - options `Object`, options used on `apiClient`
 
 [`ChildCollection#sync`]: #childcolletionsyncmethod-collection-options
+[`ChildCollection#callApiClient`]: #childcollectioncallapiclientmethod-options-cb
 
 #### `ChildCollection#create(attrs, options, cb)`
 Method to instantiate a new model for the collection

@@ -37,7 +37,7 @@ var CommentModel = GithubModel.extend({
   resourceName: 'issues',
   methodMap: {
     create: 'createComment',
-    'delete': 'deleteCommment'
+    'delete': 'deleteComment'
   }
 });
 var IssueCollection = GithubCollection.extend({
@@ -155,7 +155,7 @@ describe('A BackboneApiClient-mixed model', function () {
 
     describe('and deleting that item', function () {
       before(function deleteComment (done) {
-        this.comment['delete'](done);
+        this.comment.destroy(done);
       });
 
       it('deletes the item', function () {

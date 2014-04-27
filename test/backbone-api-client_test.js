@@ -229,6 +229,7 @@ describe('A BackboneApiClient-mixed collection', function () {
 });
 
 // Adding tests for coverage of all potential edge cases
+// DEV: These cover anything we missed about (e.g. 4 variations of save and 2 variations of fetch/create/etc)
 describe('A model using `null` for .save', function () {
   FakeGitHub.run();
   githubUtils.createClient();
@@ -255,5 +256,3 @@ describe('A model using the deprecated `key, val` notation for .sve', function (
     // `done` would have caught an error
   });
 });
-// TODO: Test all variations of save (null, key+val)
-// TODO: Verify we test at least one variation of fetch/save (options/no options)

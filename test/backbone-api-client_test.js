@@ -189,7 +189,7 @@ describe('A BackboneApiClient-mixed model', function () {
       // TODO: This should not be necessary
       // TODO: Test all variations of save (attrs, key+val)
       // TODO: Verify we test at least one variation of fetch/save (options/no options)
-      this.comment.save({/* no new attrs */}, done);
+      this.comment.save(done);
     });
 
     it('creates the item', function () {

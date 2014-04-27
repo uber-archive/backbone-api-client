@@ -58,7 +58,7 @@ var apiModelUtils = {
         user: 'twolfsontest',
         repo: 'Spoon-Knife'
       }, _attrs);
-      this.comment = new UserModel(attrs, {
+      this.comment = new CommentModel(attrs, {
         apiClient: this.apiClient
       });
     });

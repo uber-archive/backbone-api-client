@@ -114,7 +114,7 @@ model.fetch(cb);
 
 - options `Object|null`, parameters to pass to [`ChildModel#sync`][]
     - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `model.toJSON`)
-    - Any other parameters can be accessed in future options (e.g. [`ChildeModel#callApiClient`][])
+    - Any other parameters can be accessed in future options (e.g. [`ChildModel#callApiClient`][])
 - cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `fetch` results
     - err `Error|null`, error if any occurred during fetch
         - This include any errors that the API client replied with
@@ -141,7 +141,7 @@ model.save(cb);
 - attrs `Object|null`, attributes to update on the model
 - options `Object|null`, parameters to pass to [`ChildModel#sync`][]
     - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `attrs`)
-    - Any other parameters can be accessed in future options (e.g. [`ChildeModel#callApiClient`][])
+    - Any other parameters can be accessed in future options (e.g. [`ChildModel#callApiClient`][])
 - cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `save` results
     - Same properties as [`ChildModel#fetch's cb`][model-fetch]
 
@@ -160,7 +160,7 @@ model.destroy(cb);
 
 - options `Object|null`, parameters to pass to [`ChildModel#sync`][]
     - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `model.toJSON`)
-    - Any other parameters can be accessed in future options (e.g. [`ChildeModel#callApiClient`][])
+    - Any other parameters can be accessed in future options (e.g. [`ChildModel#callApiClient`][])
 - cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `save` results
     - Same properties as [`ChildModel#fetch's cb`][model-fetch]
     - Yes, this is not a typo. It will receive the model as if it still existed.
@@ -178,7 +178,7 @@ Original documentation: http://backbonejs.org/#Model-sync
 - options `Object`, container for various options to specify
     - data `Objet`, optional object of data to send (overrides `attrs`)
     - attrs `Object`, optional object of data to send (only used for `create`, `update`, or `patch` requests)
-    - Any other parameters will be available in [`ChildeModel#callApiClient`][]
+    - Any other parameters will be available in [`ChildModel#callApiClient`][]
 
 If there is a `this.adjustApiClientOptions` (via instance or prototype), then it will process the method and options.
 
@@ -244,6 +244,49 @@ this.apiClient[method](this.resourceName, this.id, options, cb);
 Returns:
 
 - ChildCollection `BackboneCollection`, extended `Collection` constructor from `CollectionKlass` with API client updates
+
+#### `ChildCollection#initialize(model, options)`
+Method to run during instantiation of new `ChildCollection`
+
+Original documentation: http://backbonejs.org/#Collection-constructor
+
+- models `Model[]|Object[]|null`, array of instantiated models or objects to become models for the collection
+- options `Object|null`, options to alter behavior of collection
+    - apiClient `Object`, instance of an API client to interact with a given API
+        - This is not asserted against but it is required for any remote calls (e.g. `fetch`, `create`)
+
+```js
+var collection = new ChildCollection(null, {
+  // Required for any remote calls (e.g. `fetch`, `create`)
+  apiClient: apiClient
+});
+```
+
+#### `ChildCollection#fetch(options, cb)`
+Method to fetch array of resources via API client
+
+Original documentation: http://backbonejs.org/#Collection-fetch
+
+Alternative invocations:
+
+```js
+collection.fetch(cb);
+```
+
+- options `Object|null`, parameters to pass to [`ChildCollection#sync`][]
+    - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `collection.toJSON`)
+    - Any other parameters can be accessed in future options (e.g. [`ChildCollection#callApiClient`][])
+- cb `Function`, error-first callback, `(err, collection, resp, options)`, to receive `fetch` results
+    - err `Error|null`, error if any occurred during fetch
+        - This include any errors that the API client replied with
+    - collection `ChildCollection`, instance of `ChildCollection` that was fetched with
+    - resp `Objet`, response that was received from call
+    - options `Object`, options used on `apiClient`
+
+[`ChildCollection#sync`]: #childcolletionsyncmethod-collection-options
+
+#### `ChildCollection#create(options, cb)`
+
 
 ## Examples
 _(Coming soon)_

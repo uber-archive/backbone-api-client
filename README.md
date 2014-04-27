@@ -200,7 +200,7 @@ Expected to return:
 #### `ChildModel#callApiClient(method, options, cb)`
 Mapping method from Backbone action to API client invocation.
 
-We provide a simple invoker but you are expected to create your own via `ChildModel#extend` since not all API client have the same API.
+We provide a simple invoker but you are expected to create your own via `ChildModel#extend` since not all API clients have the same API.
 
 - method `String`, action to perform on a resource
     - There are 5 variations: `create`, `update`, `patch`, `read`, `delete`

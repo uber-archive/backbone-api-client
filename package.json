@@ -39,7 +39,8 @@
     "github": "~0.1.16",
     "eight-track": "~2.0.0",
     "backbone": "~1.1.2",
-    "chai": "~1.9.1"
+    "chai": "~1.9.1",
+    "grunt-cli": "~0.1.13"
   },
   "keywords": [
     "backbone",

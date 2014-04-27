@@ -122,8 +122,7 @@ model.fetch(cb);
     - options `Object`, options used on `apiClient`
 
 [`ChildModel#sync`]: #childmodelsyncmethod-model-options
-
-// TODO: Link up callApiClient
+[`ChildModel#callApiClient`]: #childmodelcallapiclientmethod-options-cb
 
 #### `ChildModel#save(attrs, options, cb)`
 Method to create/update resource via API client
@@ -203,7 +202,7 @@ We provide a simple invoker but you are expected to create your own via `ChildMo
 
 Since solving this problem can be hard, we provide potential solutions in the [Examples section][].
 
-// TODO: Link to examples
+[Examples section]: #examples
 
 - method `String`, action to perform on a resource
     - There are 5 variations: `create`, `update`, `patch`, `read`, `delete`
@@ -304,7 +303,7 @@ collection.create(attrs, cb);
 - cb `Function`, error-first callback, `(err, collection, resp, options)`, to receive `fetch` results
     - Same properties as [`ChildCollection#fetch's cb`][collection-fetch]
 
-TODO: Link colleciton-fetch
+[collection-fetch]: #childcollectionfetchoptions-cb
 
 #### `ChildCollection#sync(method, collection, options)`
 Method to generate parameters to pass to API client for invocation
@@ -313,16 +312,12 @@ Original documentation: http://backbonejs.org/#Collection-sync
 
 Please refer to [`ChildModel#sync`][] for documentation as they function the same (except replace `model` with `collection`).
 
-TODO: Verify ChildModel#sync is linked
-
 #### `ChildCollection#callApiClient(method, options, cb)`
 Mapping method from Backbone action to API client invocation.
 
 We provide a simple invoker but you are expected to create your own via `ChildCollection#extend` since not all API clients have the same API.
 
 Since solving this problem can be hard, we provide potential solutions in the [Examples section][].
-
-// TODO: Link to examples
 
 - method `String`, action to perform on a resource
     - For collections, there is only `read`. The others do not occur

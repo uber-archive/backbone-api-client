@@ -1,4 +1,5 @@
 // Load in test dependencies
+var _ = require('underscore');
 var Backbone = require('backbone');
 var expect = require('chai').expect;
 var BackboneApiClient = require('../');
@@ -21,17 +22,31 @@ var apiModelUtils = {
 
 describe('A BackboneApiClient-mixed model using GitHub\'s API client', function () {
   githubUtils.createClient();
+
+  // Before we do any updates, reset the user data to a known state
+  // DEV: This verifies that previous test runs do not affect the current one (and eight-track guarantees nobody is actively updating the content)
+  before(function resetUserBio (done) {
+    // this.apiClient.update(
+  });
+
+  // Continue with the test
   before(function createModel () {
     // Generate a UserModel
     this.UserModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
       resourceName: 'user',
       // DEV: Technically, this would be part of a GitHubModel but this is compressed for testing
       callApiClient: function (method, options, cb) {
+        // Call our corresponding GitHub method (e.g. `github.user.get`, `github.user.update`)
         if (method === 'read') {
-          return this.apiClient[this.resourceName].get(options, cb);
-        } else {
-          throw new Error('We have not yet implemented "' + method + '" for `UserModel`');
+          method = 'get';
         }
+
+        // Prepare headers with data and send request
+        var params = _.clone(options.data);
+        if (options.headers) {
+          params.headers = options.headers;
+        }
+        return this.apiClient[this.resourceName][method](params, cb);
       }
     });
   });

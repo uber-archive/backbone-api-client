@@ -42,6 +42,7 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
     });
   });
 
+  // Simulate a downed server (by not running FakeGitHub) and verify we get back errors
   describe('failing to retrieve data', function () {
     before(function fetchUserData (done) {
       var that = this;
@@ -52,7 +53,7 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
     });
 
     it('calls back with an error', function () {
-      expect(this.err).to.not.equal(null);
+      expect(this.err).to.have.property('message', 'connect ECONNREFUSED');
     });
   });
 });

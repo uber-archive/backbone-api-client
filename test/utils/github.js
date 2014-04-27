@@ -4,7 +4,9 @@ var GitHubApi = require('github');
 // Define helpers to create/cleanup a GitHub API client
 exports._createClient = function () {
   var apiClient = new GitHubApi({
-    version: '3.0.0'
+    version: '3.0.0',
+    host: 'localhost',
+    port: 1337
   });
   apiClient.authenticate({
     type: 'basic',

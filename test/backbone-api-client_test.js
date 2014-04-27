@@ -1,9 +1,8 @@
+// Load in test dependencies
 var Backbone = require('backbone');
 var expect = require('chai').expect;
 var BackboneApiClient = require('../');
 var githubUtils = require('./utils/github');
-
-// TODO: Use eightTrack/express/http in front of GitHub
 
 describe('A BackboneApiClient-mixed model using GitHub\'s API client', function () {
   githubUtils.createClient();
@@ -33,14 +32,10 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
   describe('fetching data', function () {
     before(function fetchUserData (done) {
       var that = this;
-      this.user.fetch(function (err, userModel, options) {
-        that.err = err;
-        done();
-      });
+      this.user.fetch(done);
     });
 
     it('retrieves data from the API', function () {
-      expect(this.err).to.equal(null);
       expect(this.user.attributes).to.have.property('login', 'twolfsontest');
     });
   });

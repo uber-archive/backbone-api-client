@@ -183,7 +183,7 @@ describe('A BackboneApiClient-mixed model', function () {
         this.comment.destroy(done);
       });
 
-      it.only('deletes the item', function () {
+      it('deletes the item', function () {
         expect(this.comment.attributes).to.have.property('deleted', true);
       });
     });

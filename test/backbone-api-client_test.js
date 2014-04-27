@@ -24,7 +24,6 @@ var UserModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
     if (options.headers) {
       params.headers = options.headers;
     }
-    console.log(options, params);
     return this.apiClient[this.resourceName][method](params, cb);
   }
 });

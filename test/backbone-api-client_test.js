@@ -2,9 +2,11 @@
 var Backbone = require('backbone');
 var expect = require('chai').expect;
 var BackboneApiClient = require('../');
+var FakeGitHub = require('./utils/fake-github');
 var githubUtils = require('./utils/github');
 
 describe('A BackboneApiClient-mixed model using GitHub\'s API client', function () {
+  FakeGitHub.run();
   githubUtils.createClient();
   before(function createGitHubUser () {
     // Generate a UserModel

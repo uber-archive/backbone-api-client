@@ -1,6 +1,6 @@
-var backbone_api_client = require('../');
+var BackboneApiClient = require('../');
 
-describe('backbone-api-client', function () {
+describe('A BackboneApiClient-mixed model using GitHub\'s API client', function () {
   before(function () {
 
   });
@@ -9,3 +9,5 @@ describe('backbone-api-client', function () {
 
   });
 });
+
+// TODO: Test the entirety of methods (e.g. create, read, update, patch, delete)

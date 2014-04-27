@@ -6,7 +6,6 @@ var FakeGitHub = require('./utils/fake-github');
 var githubUtils = require('./utils/github');
 
 describe('A BackboneApiClient-mixed model using GitHub\'s API client', function () {
-  FakeGitHub.run();
   githubUtils.createClient();
   before(function createGitHubUser () {
     // Generate a UserModel
@@ -32,6 +31,7 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
   });
 
   describe('fetching data', function () {
+    FakeGitHub.run();
     before(function fetchUserData (done) {
       var that = this;
       this.user.fetch(done);
@@ -42,9 +42,17 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
     });
   });
 
-  describe.skip('failing to retrieve data', function () {
-    it('calls back with an error', function () {
+  describe('failing to retrieve data', function () {
+    before(function fetchUserData (done) {
+      var that = this;
+      this.user.fetch(function saveError (err, userModel, userInfo) {
+        that.err = err;
+        done();
+      });
+    });
 
+    it('calls back with an error', function () {
+      expect(this.err).to.not.equal(null);
     });
   });
 });

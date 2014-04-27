@@ -114,7 +114,7 @@ model.fetch(cb);
 
 - options `Object|null`, parameters to pass to [`ChildModel#sync`][]
     - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `model.toJSON`)
-    - Any other parameters can be accessed in [`ChildeModel#callApiClient`][]
+    - Any other parameters can be accessed in future options (e.g. [`ChildeModel#callApiClient`][])
 - cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `fetch` results
     - err `Error|null`, error if any occurred during fetch
         - This include any errors that the API client replied with
@@ -141,7 +141,7 @@ model.save(cb);
 - attrs `Object|null`, attributes to update on the model
 - options `Object|null`, parameters to pass to [`ChildModel#sync`][]
     - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `attrs`)
-    - Any other parameters can be accessed in [`ChildeModel#callApiClient`][]
+    - Any other parameters can be accessed in future options (e.g. [`ChildeModel#callApiClient`][])
 - cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `save` results
     - Same properties as [`ChildModel#fetch's cb`][model-fetch]
 
@@ -160,7 +160,7 @@ model.destroy(cb);
 
 - options `Object|null`, parameters to pass to [`ChildModel#sync`][]
     - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `model.toJSON`)
-    - Any other parameters can be accessed in [`ChildeModel#callApiClient`][]
+    - Any other parameters can be accessed in future options (e.g. [`ChildeModel#callApiClient`][])
 - cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `save` results
     - Same properties as [`ChildModel#fetch's cb`][model-fetch]
     - Yes, this is not a typo. It will receive the model as if it still existed.
@@ -174,7 +174,7 @@ Method to configure request parameters to passing to API client mapper
         - At that point, it will take the place of `update`
 - model `ChildModel`, model to act upon
 - options `Object`, container for various options to specify
-    - Anything
+    - data `Objet`, optional object of data to
     - attrs `Object`, optional object of data to send (only used for `create`, `update`, or `patch` requests)
 
 

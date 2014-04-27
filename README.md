@@ -114,6 +114,7 @@ model.fetch(cb);
 
 - options `Object|null`, parameters to pass to [`ChildModel#sync`][]
     - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `model.toJSON`)
+    - Any other parameters can be accessed in [`ChildeModel#callApiClient`][]
 - cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `fetch` results
     - err `Error|null`, error if any occurred during fetch
         - This include any errors that the API client replied with
@@ -122,6 +123,8 @@ model.fetch(cb);
     - options `Object`, options used on `apiClient`
 
 [`ChildModel#sync`]: #childmodelsyncmethod-model-options
+
+// TODO: Link up callApiClient
 
 #### `ChildModel#save(attrs, options, cb)`
 Method to create/update resource via API client
@@ -138,6 +141,7 @@ model.save(cb);
 - attrs `Object|null`, attributes to update on the model
 - options `Object|null`, parameters to pass to [`ChildModel#sync`][]
     - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `attrs`)
+    - Any other parameters can be accessed in [`ChildeModel#callApiClient`][]
 - cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `save` results
     - Same properties as [`ChildModel#fetch's cb`][model-fetch]
 
@@ -156,12 +160,22 @@ model.destroy(cb);
 
 - options `Object|null`, parameters to pass to [`ChildModel#sync`][]
     - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `model.toJSON`)
+    - Any other parameters can be accessed in [`ChildeModel#callApiClient`][]
 - cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `save` results
     - Same properties as [`ChildModel#fetch's cb`][model-fetch]
     - Yes, this is not a typo. It will receive the model as if it still existed.
 
-#### sync
-  - attrs `Object`, optional object of data to send (only used for `create`, `update`, or `patch` requests)
+#### `ChildModel#sync(method, model, options)`
+Method to configure request parameters to passing to API client mapper
+
+- method `String`, representation of what to perform on a resource
+    - There are 5 variations: `create`, `update`, `patch`, `read`, `delete`
+    - `patch` can only be found when `options.patch` is specified in `options` on a `.save` call
+        - At that point, it will take the place of `update`
+- model `ChildModel`, model to act upon
+- options `Object`, container for various options to specify
+    - Anything
+    - attrs `Object`, optional object of data to send (only used for `create`, `update`, or `patch` requests)
 
 
 ## Examples

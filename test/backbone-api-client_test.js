@@ -11,6 +11,7 @@ var UserModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
   // http://mikedeboer.github.io/node-github/#user
   // https://developer.github.com/v3/users/
   resourceName: 'user',
+  idAttribute: 'login',
   // DEV: Technically, this would be part of a GitHubModel but this is compressed for testing
   callApiClient: function (method, options, cb) {
     // Call our corresponding GitHub method (e.g. `github.user.get`, `github.user.update`)
@@ -19,20 +20,20 @@ var UserModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
     }
 
     // Prepare headers with data and send request
-    // var params = _.clone(options.data);
-    // if (options.headers) {
-    //   params.headers = options.headers;
-    // }
-    return this.apiClient[this.resourceName][method](options, cb);
+    var params = _.clone(options.data);
+    if (options.headers) {
+      params.headers = options.headers;
+    }
+    return this.apiClient[this.resourceName][method](params, cb);
   }
 });
 
 // Define a set of utilities to instantiate new models easily
 var apiModelUtils = {
-  createUser: function () {
+  createUser: function (login) {
     before(function createUser () {
       // Generate our user
-      this.user = new UserModel({/* no attributes */}, {
+      this.user = new UserModel({login: 'twolfsontest'}, {
         apiClient: this.apiClient
       });
     });
@@ -65,7 +66,23 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
 
     it('retrieves data from the API', function () {
       expect(this.user.attributes).to.have.property('login', 'twolfsontest');
-      expect(this.user.attributes).to.have.property('bio', 'This is a test account');
+      // expect(this.user.attributes).to.have.property('bio', 'This is a test account');
+    });
+  });
+
+  describe('updating data', function () {
+    apiModelUtils.createUser();
+    before(function fetchUserData (done) {
+      var that = this;
+      this.user.save({
+        attrs: {
+          bio: 'Hello World'
+        }
+      }, done);
+    });
+
+    it('updates API data', function () {
+      expect(this.user.attributes).to.have.property('bio', 'Hello World');
     });
   });
 });

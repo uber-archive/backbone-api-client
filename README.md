@@ -357,8 +357,37 @@ If the naming convention for methods is inconsistent across resources, a method 
 
 ```js
 // Interacting with issue comments via the GitHub module
+var GithubModel = ApiModel.extend({
+  callApiClient: function (methodKey, options, cb) {
+    // Prepare headers with data
+    var params = _.clone(options.data) || {};
+    if (options.headers) {
+      params.headers = options.headers;
+    }
+
+    // Find the corresponding resource method and call it
+    var method = this.methodMap[methodKey];
+    var that = this;
+    return this.apiClient[this.resourceName][method](params, cb);
+  }
+});
 var CommentModel = GithubModel.extend({
-  methodMap:
+  resourceName: 'issues',
+  methodMap: {
+    create: 'createComment',
+    read: 'getComment',
+    update: 'editComment',
+    'delete': 'deleteComment'
+  }
+});
+var RepoModel = GithubModel.extend({
+  resourceName: 'repos',
+  methodMap: {
+    create: 'create',
+    read: 'get',
+    update: 'update', // Not even consistent with `edit` =/
+    'delete': 'delete'
+  }
 });
 ```
 

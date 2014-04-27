@@ -16,6 +16,7 @@ In this example, we will be working with https://www.npmjs.org/package/github
 ```js
 // Mixin `backbone-api-client` onto a model class
 // DEV: This does `extend's` the class and does not mutate the original
+var _ = require('underscore');
 var Backbone = require('backbone');
 var Github = require('github');
 var BackboneApiClient = require('backbone-api-client');
@@ -38,7 +39,7 @@ var GithubModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
 
 // Create a repo class
 var RepoModel = GithubModel.extend({
-  resourceName: 'repos'
+  resourceName: 'repos',
   // There are 5 different methods `create`, `update`, `patch`, `read`, `delete`
   // More info can be found in Documentation
   methodMap: {
@@ -61,14 +62,10 @@ var repo = new RepoModel({}, {
 repo.fetch({
   user: 'uber',
   repo: 'backbone-api-client'
-}, console.log);
-/*
-Calls back in error-first fashion with
-`null`
-{
-
-}
-*/
+}, function (err, repo, options) {
+  console.log(repo.attributes);
+  // Logs:
+});
 ```
 
 ## Documentation

@@ -285,8 +285,34 @@ collection.fetch(cb);
 
 [`ChildCollection#sync`]: #childcolletionsyncmethod-collection-options
 
-#### `ChildCollection#create(options, cb)`
+#### `ChildCollection#create(attrs, options, cb)`
+Method to instantiate a new model for the collection
 
+Original documentation: http://backbonejs.org/#Collection-create
+
+Alternative invocations:
+
+```js
+collection.create(attrs, cb);
+```
+
+- attrs `Model|Object`, properties to create a new model with
+- options `Object|null`, parameters to pass to [`ChildCollection#sync`][]
+    - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `collection.toJSON`)
+    - Any other parameters can be accessed in future options (e.g. [`ChildCollection#callApiClient`][])
+- cb `Function`, error-first callback, `(err, collection, resp, options)`, to receive `fetch` results
+    - Same properties as [`ChildCollection#fetch's cb`][collection-fetch]
+
+TODO: Link colleciton-fetch
+
+#### `ChildCollection#sync(method, collection, options)`
+Method to generate parameters to pass to API client for invocation
+
+Original documentation: http://backbonejs.org/#Collection-sync
+
+Please refer to [`ChildModel#sync`][] for documentation as they function the same (except replace `model` with `collection`).
+
+TODO: Verify ChildModel#sync is linked
 
 ## Examples
 _(Coming soon)_

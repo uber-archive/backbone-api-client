@@ -43,7 +43,8 @@ var UserModel = GithubModel.extend({
   methodMap: {
     read: 'get',
     update: 'update'
-  },
+  }
+  // DEV: Normally, we would us `parse` to pluck out information we wanted. The current setup is way too much info.
 });
 var CommentModel = GithubModel.extend({
   // https://developer.github.com/v3/users/

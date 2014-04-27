@@ -80,6 +80,8 @@ This choice was made due to being designed for the server. In [node.js][], we ne
 
 - ModelKlass `BackboneModel`, constructor either is or is a descendant of the `Backbone.Model` constructor
 
+// TODO: Document adjustApiClientOptions
+
 Returns:
 
 - ChildModel `BackboneModel`, `Model` extended from `ModelKlass`

@@ -76,8 +76,8 @@ var IssueCollection = GithubCollection.extend({
 
 // Define a set of utilities to instantiate new models easily
 var apiModelUtils = {
-  createComment: function (_attrs) {
-    before(function createComment () {
+  initComment: function (_attrs) {
+    before(function initComment () {
       // Generate our comment
       var attrs = _.defaults({
         user: 'twolfsontest',
@@ -91,8 +91,8 @@ var apiModelUtils = {
       delete this.user;
     });
   },
-  createUser: function () {
-    before(function createUser () {
+  initUser: function () {
+    before(function initUser () {
       // Generate our user
       this.user = new UserModel({login: 'twolfsontest'}, {
         apiClient: this.apiClient
@@ -119,7 +119,7 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
 
   // Test out `.fetch` functionality
   describe('fetching data', function () {
-    apiModelUtils.createUser();
+    apiModelUtils.initUser();
     before(function fetchUserData (done) {
       var that = this;
       this.user.fetch(done);
@@ -131,7 +131,7 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
   });
 
   describe('updating data', function () {
-    apiModelUtils.createUser();
+    apiModelUtils.initUser();
     before(function fetchUserData (done) {
       this.user.save({
         bio: 'Hello World'
@@ -147,7 +147,7 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
 describe('A model fetching from a downed server', function () {
   // Simulate a downed server (by not running FakeGitHub) and verify we get back errors
   githubUtils.createClient();
-  apiModelUtils.createUser();
+  apiModelUtils.initUser();
   before(function fetchUserData (done) {
     var that = this;
     this.user.fetch(function saveError (err, userModel, userInfo) {
@@ -164,7 +164,7 @@ describe('A model fetching from a downed server', function () {
 describe('A BackboneApiClient-mixed model', function () {
   FakeGitHub.run();
   githubUtils.createClient();
-  apiModelUtils.createComment({
+  apiModelUtils.initComment({
     number: 1, // First issue thread
     body: 'Oh hai'
   });

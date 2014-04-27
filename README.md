@@ -80,8 +80,6 @@ This choice was made due to being designed for the server. In [node.js][], we ne
 
 - ModelKlass `BackboneModel`, constructor either is or is a descendant of the `Backbone.Model` constructor
 
-// TODO: Document adjustApiClientOptions
-
 Returns:
 
 - ChildModel `BackboneModel`, `Model` extended from `ModelKlass`
@@ -170,15 +168,34 @@ model.destroy(cb);
 #### `ChildModel#sync(method, model, options)`
 Method to configure request parameters to passing to API client mapper
 
-- method `String`, representation of what to perform on a resource
+- method `String`, action to perform on a resource
     - There are 5 variations: `create`, `update`, `patch`, `read`, `delete`
     - `patch` can only be found when `options.patch` is specified in `options` on a `.save` call
         - At that point, it will take the place of `update`
 - model `ChildModel`, model to act upon
 - options `Object`, container for various options to specify
-    - data `Objet`, optional object of data to
+    - data `Objet`, optional object of data to send (overrides `attrs`)
     - attrs `Object`, optional object of data to send (only used for `create`, `update`, or `patch` requests)
+    - Any other parameters will be available in [`ChildeModel#callApiClient`][]
 
+If there is a `this.adjustApiClientOptions` (via instance or prototype), then it will process the method and options.
+
+#### `ChildModel#adjustApiClientOptions(method, options)`
+User-defined method to adjust `options` before moving to `callApiClient`. This was built to add any cache-relevant data before entering a cache-aware method which poses problems during inheritance.
+
+**if you want to use this, it must be defined by future extensions of the class.**
+
+- method `String`, `method` from `sync`
+- options `Object`, `options` from `sync`
+
+Expected to return:
+
+- reqOptions `Object|null`, `options` to pass on to `callApiClient`
+    - If nothing is returned, the `options` object will be returned
+        - This can be used in unison with mutation
+    - If you choose to return an object, this will be used as the request `options`
+
+#### callApiClient
 
 ## Examples
 _(Coming soon)_

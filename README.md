@@ -168,6 +168,8 @@ model.destroy(cb);
 #### `ChildModel#sync(method, model, options)`
 Method to configure request parameters to passing to API client mapper
 
+Original documentation: http://backbonejs.org/#Model-sync
+
 - method `String`, action to perform on a resource
     - There are 5 variations: `create`, `update`, `patch`, `read`, `delete`
     - `patch` can only be found when `options.patch` is specified in `options` on a `.save` call
@@ -195,7 +197,40 @@ Expected to return:
         - This can be used in unison with mutation
     - If you choose to return an object, this will be used as the request `options`
 
-#### callApiClient
+#### `ChildModel#callApiClient(method, options, cb)`
+Mapping method from Backbone action to API client invocation.
+
+We provide a simple invoker but you are expected to create your own via `ChildModel#extend` since not all API client have the same API.
+
+- method `String`, action to perform on a resource
+    - There are 5 variations: `create`, `update`, `patch`, `read`, `delete`
+    - `patch` can only be found when `options.patch` is specified in `options` on a `.save` call
+        - At that point, it will take the place of `update`
+- options `Object`, options passed in from `fetch`/`save`/etc and modified during `sync`
+    - data `Object`, attributes to update for the resource
+    - Any other properties will have been passed in the original `fetch`/`save`/etc invocation
+- cb `Function`, error-first callback method, `(err, resp)` to send back information for handling
+    - err `Error|null`, error if any occurred within API client's request
+    - resp `Mixed`, API client's response for the request
+        - Any data formatting/preparation should be handled in [`Model#parse`][]
+
+[`Model#parse`]: http://backbonejs.org/#Model-parse
+
+For reference, our stub is set as follows:
+
+**Requires**:
+
+- this.resourceName `String`, API client name for resource (e.g. `repos`, `issues`)
+
+```js
+// If this is a create invocation, create it
+// Example: this.apiClient.create('tweets', options, cb);
+this.apiClient[method](this.resourceName, options, cb);
+
+// Otherwise, modify the specific resource
+// Example: this.apiClient.update('tweets', 42, options, cb);
+this.apiClient[method](this.resourceName, options, cb);
+```
 
 ## Examples
 _(Coming soon)_

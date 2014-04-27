@@ -11,9 +11,64 @@ This was built for usage within [node.js][] and to be flexible to be reused acro
 ## Getting Started
 Install the module with: `npm install backbone-api-client`
 
+In this example, we will be working with https://www.npmjs.org/package/github
+
 ```js
-var backbone_api_client = require('backbone-api-client');
-backbone_api_client.awesome(); // "awesome"
+// Mixin `backbone-api-client` onto a model class
+// DEV: This does `extend's` the class and does not mutate the original
+var Backbone = require('backbone');
+var Github = require('github');
+var BackboneApiClient = require('backbone-api-client');
+var GithubModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
+  // DEV: Since each API client is different, this is where we map
+  // backbone information into API client information
+  callApiClient: function (methodKey, options, cb) {
+    // Prepare headers with data
+    var params = _.clone(options.data) || {};
+    if (options.headers) {
+      params.headers = options.headers;
+    }
+
+    // Find the corresponding resource method and call it
+    var method = this.methodMap[methodKey];
+    var that = this;
+    return this.apiClient[this.resourceName][method](params, cb);
+  }
+});
+
+// Create a repo class
+var RepoModel = GithubModel.extend({
+  resourceName: 'repos'
+  // There are 5 different methods `create`, `update`, `patch`, `read`, `delete`
+  // More info can be found in Documentation
+  methodMap: {
+    read: 'get'
+  }
+});
+
+// Fetch information for a repo with an API client
+var apiClient = new Github({
+  version: '3.0.0'
+});
+apiClient.authenticate({
+  type: 'basic',
+  username: process.env.GITHUB_USERNAME,
+  password: process.env.GITHUB_PASSWORD
+});
+var repo = new RepoModel({}, {
+  apiClient: apiClient
+});
+repo.fetch({
+  user: 'uber',
+  repo: 'backbone-api-client'
+}, console.log);
+/*
+Calls back in error-first fashion with
+`null`
+{
+
+}
+*/
 ```
 
 ## Documentation

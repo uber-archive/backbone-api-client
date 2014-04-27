@@ -65,10 +65,13 @@ var CommentModel = GithubModel.extend({
     }
   }
 });
+var IssueModel = GithubModel.extend({
+  resourceName: 'issues'
+});
 var IssueCollection = GithubCollection.extend({
   // https://developer.github.com/v3/issues/
   // http://mikedeboer.github.io/node-github/#issues.prototype.repoIssues
-  resourceName: 'issues',
+  resourceName: IssueModel.prototype.resourceName,
   methodMap: {
     read: 'repoIssues'
   }
@@ -89,6 +92,17 @@ var apiModelUtils = {
     });
     after(function cleanupComment () {
       delete this.user;
+    });
+  },
+  initIssues: function () {
+    before(function initIssues () {
+      // Generate our user
+      this.issues = new IssueCollection([], {
+        apiClient: this.apiClient
+      });
+    });
+    after(function cleanupIssues () {
+      delete this.issues;
     });
   },
   initUser: function () {
@@ -171,6 +185,9 @@ describe('A BackboneApiClient-mixed model', function () {
 
   describe('creating a new item', function () {
     before(function createComment (done) {
+      // TODO: This should not be necessary
+      // TODO: Test all variations of save (attrs, key+val)
+      // TODO: Verify we test at least one variation of fetch/save (options/no options)
       this.comment.save({/* no new attrs */}, done);
     });
 
@@ -190,4 +207,24 @@ describe('A BackboneApiClient-mixed model', function () {
   });
 });
 
-// TODO: Test collections
+describe('A BackboneApiClient-mixed collection', function () {
+  FakeGitHub.run();
+  githubUtils.createClient();
+  apiModelUtils.initIssues();
+
+  describe('when fetched', function () {
+    before(function loadIssues (done) {
+      this.issues.fetch({
+        data: {
+          user: 'twolfsontest',
+          repo: 'Spoon-Knife'
+        }
+      }, done);
+    });
+
+    it('instantiates models', function () {
+      expect(this.issues).to.have.length(1);
+      expect(this.issues[0].attributes).to.have.property('id', 1);
+    });
+  });
+});

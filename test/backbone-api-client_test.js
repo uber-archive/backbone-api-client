@@ -137,6 +137,7 @@ describe('A model fetching from a downed server', function () {
 });
 
 describe('A BackboneApiClient-mixed model', function () {
+  FakeGitHub.run();
   githubUtils.createClient();
   apiModelUtils.createComment({
     number: 1, // First issue thread
@@ -145,7 +146,7 @@ describe('A BackboneApiClient-mixed model', function () {
 
   describe('creating a new item', function () {
     before(function createComment (done) {
-      this.comment.save(done);
+      this.comment.save({/* no new attrs */}, done);
     });
 
     it('creates the item', function () {

@@ -33,6 +33,8 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
   before(function createModel () {
     // Generate a UserModel
     this.UserModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
+      // http://mikedeboer.github.io/node-github/#user
+      // https://developer.github.com/v3/users/
       resourceName: 'user',
       // DEV: Technically, this would be part of a GitHubModel but this is compressed for testing
       callApiClient: function (method, options, cb) {

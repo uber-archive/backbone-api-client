@@ -6,6 +6,7 @@ var BackboneApiClient = require('../');
 var FakeGitHub = require('./utils/fake-github');
 var githubUtils = require('./utils/github');
 
+// Define a set of utilities to instantiate new models easily
 var apiModelUtils = {
   createUser: function () {
     before(function createUser () {
@@ -20,6 +21,7 @@ var apiModelUtils = {
   }
 };
 
+// Start the tests
 describe('A BackboneApiClient-mixed model using GitHub\'s API client', function () {
   githubUtils.createClient();
 
@@ -56,6 +58,7 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
     delete this.UserModel;
   });
 
+  // Test out `.fetch` functionality
   describe('fetching data', function () {
     apiModelUtils.createUser();
     FakeGitHub.run();

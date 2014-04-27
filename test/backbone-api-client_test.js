@@ -13,7 +13,7 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
       // DEV: Technically, this would be part of a GitHubModel but this is compressed for testing
       callApiClient: function (method, options, cb) {
         if (method === 'read') {
-          return this.apiClient[this.resourceName].get(options, cb);
+          return this.apiClient[this.resourceName].get({}, cb);
         } else {
           throw new Error('We have not yet implemented "' + method + '" for `UserModel`');
         }
@@ -24,7 +24,9 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
     // Generate our user
     this.user = new UserModel({}, {
       apiClient: new GitHubApi({
-        version: '3.0.0'
+        version: '3.0.0',
+        username: 'twolfsontest',
+        password: 'password1234'
       })
     });
   });

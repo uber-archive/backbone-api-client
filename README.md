@@ -2,6 +2,8 @@
 
 Backbone mixin built for interacting with API clients
 
+TAKE CARE OF TODOS
+
 ## Getting Started
 Install the module with: `npm install backbone-api-client`
 

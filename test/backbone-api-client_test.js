@@ -65,8 +65,7 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
     });
 
     it('retrieves data from the API', function () {
-      expect(this.user.attributes).to.have.property('login', 'twolfsontest');
-      // expect(this.user.attributes).to.have.property('bio', 'This is a test account');
+      expect(this.user.attributes).to.have.property('bio', 'This is a test account');
     });
   });
 

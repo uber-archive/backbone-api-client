@@ -233,8 +233,17 @@ this.apiClient[method](this.resourceName, options, cb);
 
 // Otherwise, modify the specific resource
 // Example: this.apiClient.update('tweets', 42, options, cb);
-this.apiClient[method](this.resourceName, options, cb);
+this.apiClient[method](this.resourceName, this.id, options, cb);
 ```
+
+### `mixinCollection(CollectionKlass)`
+`Collection` equivalent of `mixinModel`; extends `CollectionKlass` and adds API client logic.
+
+- CollectionKlass `BackboneCollection`, constructor for a `Collection` to extend upon
+
+Returns:
+
+- ChildCollection `BackboneCollection`, extended `Collection` constructor from `CollectionKlass` with API client updates
 
 ## Examples
 _(Coming soon)_

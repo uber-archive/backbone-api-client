@@ -7,30 +7,31 @@ var FakeGitHub = require('./utils/fake-github');
 var githubUtils = require('./utils/github');
 
 // Define some models/collections
-var UserModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
-  // http://mikedeboer.github.io/node-github/#user
-  // https://developer.github.com/v3/users/
-  resourceName: 'user',
-  idAttribute: 'login',
-  // DEV: Technically, this would be part of a GitHubModel but this is compressed for testing
-  callApiClient: function (method, options, cb) {
-    // Call our corresponding GitHub method (e.g. `github.user.get`, `github.user.update`)
-    if (method === 'read') {
-      method = 'get';
-    }
-
+var GithubModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
+  callApiClient: function (methodKey, options, cb) {
     // Prepare headers with data and send request
     var params = _.clone(options.data) || {};
     if (options.headers) {
       params.headers = options.headers;
     }
+    var method = this.methodMap[methodKey];
     return this.apiClient[this.resourceName][method](params, cb);
   }
+});
+var UserModel = GithubModel.extend({
+  // http://mikedeboer.github.io/node-github/#user
+  // https://developer.github.com/v3/users/
+  resourceName: 'user',
+  idAttribute: 'login',
+  methodMap: {
+    read: 'get',
+    update: 'update'
+  },
 });
 
 // Define a set of utilities to instantiate new models easily
 var apiModelUtils = {
-  createUser: function (login) {
+  createUser: function () {
     before(function createUser () {
       // Generate our user
       this.user = new UserModel({login: 'twolfsontest'}, {
@@ -84,10 +85,6 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
   });
 });
 
-// TODO: Test the entirety of methods (e.g. create, read, update, patch, delete)
-
-// TODO: Test collections
-
 describe('A model fetching from a downed server', function () {
   // Simulate a downed server (by not running FakeGitHub) and verify we get back errors
   githubUtils.createClient();
@@ -104,3 +101,6 @@ describe('A model fetching from a downed server', function () {
     expect(this.err).to.have.property('message', 'connect ECONNREFUSED');
   });
 });
+// TODO: Test the entirety of methods (e.g. create, read, update, patch, delete)
+
+// TODO: Test collections

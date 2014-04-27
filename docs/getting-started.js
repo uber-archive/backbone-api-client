@@ -42,9 +42,11 @@ var repo = new RepoModel({}, {
   apiClient: apiClient
 });
 repo.fetch({
-  user: 'uber',
-  repo: 'backbone-api-client'
+  data: {
+    user: 'uber',
+    repo: 'backbone-api-client'
+  }
 }, function (err, repo, options) {
   console.log(repo.attributes);
-  // Logs:
+  // Logs: {id: 19190227, name: 'backbone-api-client', ...}
 });

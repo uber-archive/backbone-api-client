@@ -51,6 +51,21 @@ var IssueCollection = GithubCollection.extend({
 
 // Define a set of utilities to instantiate new models easily
 var apiModelUtils = {
+  createComment: function (_attrs) {
+    before(function createComment () {
+      // Generate our comment
+      var attrs = _.defaults({
+        user: 'twolfsontest',
+        repo: 'Spoon-Knife'
+      }, _attrs);
+      this.comment = new UserModel(attrs, {
+        apiClient: this.apiClient
+      });
+    });
+    after(function cleanupComment () {
+      delete this.user;
+    });
+  },
   createUser: function () {
     before(function createUser () {
       // Generate our user
@@ -93,7 +108,6 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
   describe('updating data', function () {
     apiModelUtils.createUser();
     before(function fetchUserData (done) {
-      var that = this;
       this.user.save({
         bio: 'Hello World'
       }, done);
@@ -121,6 +135,29 @@ describe('A model fetching from a downed server', function () {
     expect(this.err).to.have.property('message', 'connect ECONNREFUSED');
   });
 });
-// TODO: Test the entirety of methods (e.g. create, read, update, patch, delete)
+
+describe('A BackboneApiClient-mixed model', function () {
+  githubUtils.createClient();
+  apiModelUtils.createComment({
+    number: 1, // First issue thread
+    body: 'Oh hai'
+  });
+
+  describe('creating a new item', function () {
+    before(function createComment (done) {
+      this.comment.save(done);
+    });
+
+    it('creates the item', function () {
+
+    });
+
+    describe('and deleting that item', function () {
+      it('deletes the item', function () {
+
+      });
+    });
+  });
+});
 
 // TODO: Test collections

@@ -143,6 +143,23 @@ model.save(cb);
 
 [model-fetch]: #childmodelfetchoptions-cb
 
+#### `ChildModel#destroy(options, cb)`
+Method to destroy resource via API client
+
+Original documentation: http://backbonejs.org/#Model-destroy
+
+Alternative invocations:
+
+```js
+model.destroy(cb);
+```
+
+- options `Object|null`, parameters to pass to [`ChildModel#sync`][]
+    - data `Object`, optional object of data to send instead of `Backbone's` defaults (e.g. `model.toJSON`)
+- cb `Function`, error-first callback, `(err, model, resp, options)`, to receive `save` results
+    - Same properties as [`ChildModel#fetch's cb`][model-fetch]
+    - Yes, this is not a typo. It will receive the model as if it still existed.
+
 #### sync
   - attrs `Object`, optional object of data to send (only used for `create`, `update`, or `patch` requests)
 

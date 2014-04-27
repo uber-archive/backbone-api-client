@@ -19,13 +19,22 @@ var GithubModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
   }
 });
 var UserModel = GithubModel.extend({
+  // https://developer.github.com/v3/issues/comments/
   // http://mikedeboer.github.io/node-github/#user
-  // https://developer.github.com/v3/users/
   resourceName: 'user',
   idAttribute: 'login',
   methodMap: {
     read: 'get',
     update: 'update'
+  },
+});
+var CommentModel = GithubModel.extend({
+  // https://developer.github.com/v3/users/
+  // http://mikedeboer.github.io/node-github/#issues.prototype.createComment
+  resourceName: 'issues',
+  methodMap: {
+    create: 'createComment',
+    'delete': 'deleteCommment'
   },
 });
 

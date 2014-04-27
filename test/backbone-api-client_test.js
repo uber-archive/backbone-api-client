@@ -15,7 +15,21 @@ var GithubModel = BackboneApiClient.mixinModel(Backbone.Model).extend({
       params.headers = options.headers;
     }
     var method = this.methodMap[methodKey];
-    return this.apiClient[this.resourceName][method](params, cb);
+    var that = this;
+    return this.apiClient[this.resourceName][method](params, function handleResponse (err, res) {
+      // If there is an error, callback with it
+      if (err) {
+        return cb(err);
+      }
+
+      // If the method was a deletion (and we were successful), mark the item as deleted
+      if (methodKey === 'delete' && res.meta.status === '204 No Content') {
+        that.set('deleted', true);
+      }
+
+      // Callback as per usual
+      cb(null, res);
+    });
   }
 });
 var GithubCollection = BackboneApiClient.mixinCollection(Backbone.Collection).extend({
@@ -38,6 +52,16 @@ var CommentModel = GithubModel.extend({
   methodMap: {
     create: 'createComment',
     'delete': 'deleteComment'
+  },
+  adjustApiClientOptions: function (method, options) {
+    // If this is a deletion, add on user, repo, and id
+    if (method === 'delete') {
+      options.data = _.extend({
+        user: this.get('user').login,
+        repo: this.get('repo'),
+        id: this.get('id')
+      }, options.data);
+    }
   }
 });
 var IssueCollection = GithubCollection.extend({
@@ -158,8 +182,8 @@ describe('A BackboneApiClient-mixed model', function () {
         this.comment.destroy(done);
       });
 
-      it('deletes the item', function () {
-        console.log(this.comment);
+      it.only('deletes the item', function () {
+        expect(this.comment.attributes).to.have.property('deleted', true);
       });
     });
   });

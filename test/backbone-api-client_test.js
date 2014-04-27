@@ -186,9 +186,6 @@ describe('A BackboneApiClient-mixed model', function () {
 
   describe('creating a new item', function () {
     before(function createComment (done) {
-      // TODO: This should not be necessary
-      // TODO: Test all variations of save (attrs, key+val)
-      // TODO: Verify we test at least one variation of fetch/save (options/no options)
       this.comment.save(done);
     });
 
@@ -230,3 +227,7 @@ describe('A BackboneApiClient-mixed collection', function () {
     });
   });
 });
+
+// Adding tests for coverage of all potential edge cases
+// TODO: Test all variations of save (null, attrs, key+val)
+// TODO: Verify we test at least one variation of fetch/save (options/no options)

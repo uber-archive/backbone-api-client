@@ -71,6 +71,7 @@ var IssueModel = GithubModel.extend({
 var IssueCollection = GithubCollection.extend({
   // https://developer.github.com/v3/issues/
   // http://mikedeboer.github.io/node-github/#issues.prototype.repoIssues
+  model: IssueModel,
   resourceName: IssueModel.prototype.resourceName,
   methodMap: {
     read: 'repoIssues'
@@ -224,7 +225,8 @@ describe('A BackboneApiClient-mixed collection', function () {
 
     it('instantiates models', function () {
       expect(this.issues).to.have.length(1);
-      expect(this.issues[0].attributes).to.have.property('id', 1);
+      expect(this.issues.models[0]).to.an['instanceof'](IssueModel);
+      expect(this.issues.models[0].attributes).to.have.property('id');
     });
   });
 });

@@ -202,6 +202,10 @@ Mapping method from Backbone action to API client invocation.
 
 We provide a simple invoker but you are expected to create your own via `ChildModel#extend` since not all API clients have the same API.
 
+Since solving this problem can be hard, we provide potential solutions in the [Examples section][].
+
+// TODO: Link to examples
+
 - method `String`, action to perform on a resource
     - There are 5 variations: `create`, `update`, `patch`, `read`, `delete`
     - `patch` can only be found when `options.patch` is specified in `options` on a `.save` call

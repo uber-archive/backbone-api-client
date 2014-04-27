@@ -288,6 +288,8 @@ collection.fetch(cb);
 #### `ChildCollection#create(attrs, options, cb)`
 Method to instantiate a new model for the collection
 
+Following steps (e.g. `sync`) will not occur in the `ChildCollection` pipeline but in the `ChildModel` pipeline.
+
 Original documentation: http://backbonejs.org/#Collection-create
 
 Alternative invocations:
@@ -313,6 +315,39 @@ Original documentation: http://backbonejs.org/#Collection-sync
 Please refer to [`ChildModel#sync`][] for documentation as they function the same (except replace `model` with `collection`).
 
 TODO: Verify ChildModel#sync is linked
+
+#### `ChildCollection#callApiClient(method, options, cb)`
+Mapping method from Backbone action to API client invocation.
+
+We provide a simple invoker but you are expected to create your own via `ChildCollection#extend` since not all API clients have the same API.
+
+Since solving this problem can be hard, we provide potential solutions in the [Examples section][].
+
+// TODO: Link to examples
+
+- method `String`, action to perform on a resource
+    - For collections, there is only `read`. The others do not occur
+- options `Object`, options passed in from `fetch` and modified during `sync`
+    - data `Object`, attributes to update for the resource
+    - Any other properties will have been passed in the original `fetch` invocation
+- cb `Function`, error-first callback method, `(err, resp)` to send back information for handling
+    - err `Error|null`, error if any occurred within API client's request
+    - resp `Mixed`, API client's response for the request
+        - Any data formatting/preparation should be handled in [`Collection#parse`][]
+
+[`Collection#parse`]: http://backbonejs.org/#Collection-parse
+
+For reference, our stub is set as follows:
+
+**Requires**:
+
+- this.resourceName `String`, API client name for resource (e.g. `repos`, `issues`)
+
+```js
+// Load all items in a colleciton
+// Example: this.apiClient.read('tweets', options, cb);
+this.apiClient[method](this.resourceName, options, cb);
+```
 
 ## Examples
 _(Coming soon)_

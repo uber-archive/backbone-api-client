@@ -1,5 +1,6 @@
-var GitHubApi = require('github');
 var Backbone = require('backbone');
+var GitHubApi = require('github');
+var expect = require('chai').expect;
 var BackboneApiClient = require('../');
 
 // TODO: Use eightTrack/express/http in front of GitHub
@@ -41,7 +42,9 @@ describe('A BackboneApiClient-mixed model using GitHub\'s API client', function 
     });
 
     it('retrieves data from the API', function () {
+      expect(this.err).to.equal(null);
       // console.log(this.user);
+      expect(this.user.attributes).to.not.be.empty();
     });
   });
 

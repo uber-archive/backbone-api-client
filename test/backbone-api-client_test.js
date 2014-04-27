@@ -229,5 +229,5 @@ describe('A BackboneApiClient-mixed collection', function () {
 });
 
 // Adding tests for coverage of all potential edge cases
-// TODO: Test all variations of save (null, attrs, key+val)
+// TODO: Test all variations of save (null, key+val)
 // TODO: Verify we test at least one variation of fetch/save (options/no options)

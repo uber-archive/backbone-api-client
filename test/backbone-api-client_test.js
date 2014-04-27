@@ -150,12 +150,16 @@ describe('A BackboneApiClient-mixed model', function () {
     });
 
     it('creates the item', function () {
-
+      expect(this.comment).to.have.property('id');
     });
 
     describe('and deleting that item', function () {
-      it('deletes the item', function () {
+      before(function deleteComment (done) {
+        this.comment['delete'](done);
+      });
 
+      it('deletes the item', function () {
+        console.log(this.comment);
       });
     });
   });

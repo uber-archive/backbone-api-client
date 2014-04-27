@@ -56,7 +56,7 @@ apiClient.authenticate({
   username: process.env.GITHUB_USERNAME,
   password: process.env.GITHUB_PASSWORD
 });
-var repo = new RepoModel({}, {
+var repo = new RepoModel(null, {
   apiClient: apiClient
 });
 repo.fetch({
@@ -71,7 +71,35 @@ repo.fetch({
 ```
 
 ## Documentation
-_(Coming soon)_
+`backbone-api-client` exposes 2 methods, `mixinModel` and `mixinCollection`, via its `module.exports`.
+
+### `mixinModel(ModelKlass)`
+Extends `ModelKlass`, via `ModelKlass.extend`, and adds API client logic. Additionally, all `sync`-related methods (e.g. `save`, `fetch`) now operate on an error-first `callback` over `success`/`error` options.
+
+This choice was made due to being designed for the server. In [node.js][], we never want to forget errors and leave requests hanging. By using error-first, we are constantly reminded to handle these errors.
+
+- ModelKlass `BackboneModel`, constructor either is or is a descendant of the `Backbone.Model` constructor
+
+Returns:
+
+- ChildKlass `BackboneModel`, `Model` extended from `ModelKlass`
+
+#### `ChildKlass#initialize(attrs, options)`
+Method run when a `ChildKlass` is being instantiated
+
+http://backbonejs.org/#Model-constructor
+
+- attrs `Object|null`, attributes passed in to `new ChildKlass(attrs, options)` call
+- options `Object|null`, parameters to adjust model behavior
+    - apiClient `Object`, instance of an API client to interact with a given API
+        - This is not asserted against but it is required for any remote calls (e.g. `save`, `fetch`)
+
+```js
+var model = new ChildKlass(null, {
+  // Required for any remote calls (e.g. `save`, `fetch`)
+  apiClient: apiClient
+});
+```
 
 ## Examples
 _(Coming soon)_

@@ -38,7 +38,7 @@ apiClient.authenticate({
   username: process.env.GITHUB_USERNAME,
   password: process.env.GITHUB_PASSWORD
 });
-var repo = new RepoModel({}, {
+var repo = new RepoModel(null, {
   apiClient: apiClient
 });
 repo.fetch({

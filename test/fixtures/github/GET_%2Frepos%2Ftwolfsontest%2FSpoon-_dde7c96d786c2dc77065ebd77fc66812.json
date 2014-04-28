@@ -1,0 +1,49 @@
+{
+  "request": {
+    "httpVersion": "1.1",
+    "headers": {
+      "host": "localhost",
+      "content-length": "0",
+      "authorization": "Basic dHdvbGZzb250ZXN0OnBhc3N3b3JkMTIzNA==",
+      "user-agent": "NodeJS HTTP Client",
+      "accept": "application/vnd.github.beta+json",
+      "connection": "keep-alive"
+    },
+    "trailers": {},
+    "method": "GET",
+    "url": "/repos/twolfsontest/Spoon-Knife/issues",
+    "bodyEncoding": "utf8",
+    "body": ""
+  },
+  "response": {
+    "httpVersion": "1.1",
+    "headers": {
+      "server": "GitHub.com",
+      "date": "Sun, 27 Apr 2014 07:26:42 GMT",
+      "content-type": "application/json; charset=utf-8",
+      "status": "200 OK",
+      "x-ratelimit-limit": "5000",
+      "x-ratelimit-remaining": "4999",
+      "x-ratelimit-reset": "1398587202",
+      "cache-control": "private, max-age=60, s-maxage=60",
+      "etag": "\"ec4ef50f83d6dda294c81aea0489e979\"",
+      "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+      "x-github-media-type": "github.beta; format=json",
+      "x-xss-protection": "1; mode=block",
+      "x-frame-options": "deny",
+      "content-security-policy": "default-src 'none'",
+      "content-length": "1778",
+      "access-control-allow-credentials": "true",
+      "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+      "access-control-allow-origin": "*",
+      "x-github-request-id": "4C152A85:6404:3C4F82:535CB131",
+      "strict-transport-security": "max-age=31536000",
+      "x-content-type-options": "nosniff",
+      "x-served-by": "88d924ed861736d2749ce1a55766cb53"
+    },
+    "trailers": {},
+    "statusCode": 200,
+    "bodyEncoding": "utf8",
+    "body": "[{\"url\":\"https://api.github.com/repos/twolfsontest/Spoon-Knife/issues/1\",\"labels_url\":\"https://api.github.com/repos/twolfsontest/Spoon-Knife/issues/1/labels{/name}\",\"comments_url\":\"https://api.github.com/repos/twolfsontest/Spoon-Knife/issues/1/comments\",\"events_url\":\"https://api.github.com/repos/twolfsontest/Spoon-Knife/issues/1/events\",\"html_url\":\"https://github.com/twolfsontest/Spoon-Knife/issues/1\",\"id\":32305574,\"number\":1,\"title\":\"Hello World\",\"user\":{\"login\":\"twolfsontest\",\"id\":7418145,\"avatar_url\":\"https://avatars.githubusercontent.com/u/7418145?\",\"gravatar_id\":\"f11ffa3877a572c726189a8c0c5be1f2\",\"url\":\"https://api.github.com/users/twolfsontest\",\"html_url\":\"https://github.com/twolfsontest\",\"followers_url\":\"https://api.github.com/users/twolfsontest/followers\",\"following_url\":\"https://api.github.com/users/twolfsontest/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/twolfsontest/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/twolfsontest/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/twolfsontest/subscriptions\",\"organizations_url\":\"https://api.github.com/users/twolfsontest/orgs\",\"repos_url\":\"https://api.github.com/users/twolfsontest/repos\",\"events_url\":\"https://api.github.com/users/twolfsontest/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/twolfsontest/received_events\",\"type\":\"User\",\"site_admin\":false},\"labels\":[],\"state\":\"open\",\"assignee\":null,\"milestone\":null,\"comments\":0,\"created_at\":\"2014-04-27T06:30:45Z\",\"updated_at\":\"2014-04-27T07:08:44Z\",\"closed_at\":null,\"pull_request\":{\"url\":null,\"html_url\":null,\"diff_url\":null,\"patch_url\":null},\"body\":\"This is a test issue for commenting on!\\r\\n\\r\\nThis is used by https://github.com/uber/backbone-api-client for testing.\"}]"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "request": {
+    "httpVersion": "1.1",
+    "headers": {
+      "host": "localhost",
+      "content-length": "32",
+      "content-type": "application/json; charset=utf-8",
+      "authorization": "Basic dHdvbGZzb250ZXN0OnBhc3N3b3JkMTIzNA==",
+      "user-agent": "NodeJS HTTP Client",
+      "accept": "application/vnd.github.beta+json",
+      "connection": "keep-alive"
+    },
+    "trailers": {},
+    "method": "PATCH",
+    "url": "/user",
+    "bodyEncoding": "utf8",
+    "body": "{\"bio\":\"This is a test account\"}"
+  },
+  "response": {
+    "httpVersion": "1.1",
+    "headers": {
+      "server": "GitHub.com",
+      "date": "Sun, 27 Apr 2014 06:17:19 GMT",
+      "content-type": "application/json; charset=utf-8",
+      "status": "200 OK",
+      "x-ratelimit-limit": "5000",
+      "x-ratelimit-remaining": "4997",
+      "x-ratelimit-reset": "1398582683",
+      "cache-control": "private, max-age=60, s-maxage=60",
+      "etag": "\"86d710ddd5486175164d6efea1bdc254\"",
+      "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+      "x-github-media-type": "github.beta; format=json",
+      "x-xss-protection": "1; mode=block",
+      "x-frame-options": "deny",
+      "content-security-policy": "default-src 'none'",
+      "content-length": "1443",
+      "access-control-allow-credentials": "true",
+      "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+      "access-control-allow-origin": "*",
+      "x-github-request-id": "4C152A85:3DD0:293E6A:535CA0EF",
+      "strict-transport-security": "max-age=31536000",
+      "x-content-type-options": "nosniff",
+      "x-served-by": "a1d8c69b807c8e21f06cad9da377d1b0"
+    },
+    "trailers": {},
+    "statusCode": 200,
+    "bodyEncoding": "utf8",
+    "body": "{\"login\":\"twolfsontest\",\"id\":7418145,\"avatar_url\":\"https://avatars.githubusercontent.com/u/7418145?\",\"gravatar_id\":\"f11ffa3877a572c726189a8c0c5be1f2\",\"url\":\"https://api.github.com/users/twolfsontest\",\"html_url\":\"https://github.com/twolfsontest\",\"followers_url\":\"https://api.github.com/users/twolfsontest/followers\",\"following_url\":\"https://api.github.com/users/twolfsontest/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/twolfsontest/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/twolfsontest/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/twolfsontest/subscriptions\",\"organizations_url\":\"https://api.github.com/users/twolfsontest/orgs\",\"repos_url\":\"https://api.github.com/users/twolfsontest/repos\",\"events_url\":\"https://api.github.com/users/twolfsontest/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/twolfsontest/received_events\",\"type\":\"User\",\"site_admin\":false,\"name\":\"Todd Wolfson (test account)\",\"company\":\"Uber\",\"blog\":\"http://twolfson.com/\",\"location\":\"San Francisco\",\"email\":\"todd@twolfson.com\",\"hireable\":false,\"bio\":\"This is a test account\",\"public_repos\":0,\"public_gists\":0,\"followers\":0,\"following\":0,\"created_at\":\"2014-04-27T05:00:02Z\",\"updated_at\":\"2014-04-27T06:11:23Z\",\"private_gists\":0,\"total_private_repos\":0,\"owned_private_repos\":0,\"disk_usage\":0,\"collaborators\":0,\"plan\":{\"name\":\"free\",\"space\":307200,\"collaborators\":0,\"private_repos\":0}}"
+  }
+}

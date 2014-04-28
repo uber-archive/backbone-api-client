@@ -1,0 +1,50 @@
+{
+  "request": {
+    "httpVersion": "1.1",
+    "headers": {
+      "host": "localhost",
+      "content-length": "17",
+      "content-type": "application/json; charset=utf-8",
+      "authorization": "Basic dHdvbGZzb250ZXN0OnBhc3N3b3JkMTIzNA==",
+      "user-agent": "NodeJS HTTP Client",
+      "accept": "application/vnd.github.beta+json",
+      "connection": "keep-alive"
+    },
+    "trailers": {},
+    "method": "POST",
+    "url": "/repos/twolfsontest/Spoon-Knife/issues/1/comments",
+    "bodyEncoding": "utf8",
+    "body": "{\"body\":\"Oh hai\"}"
+  },
+  "response": {
+    "httpVersion": "1.1",
+    "headers": {
+      "server": "GitHub.com",
+      "date": "Sun, 27 Apr 2014 06:52:08 GMT",
+      "content-type": "application/json; charset=utf-8",
+      "status": "201 Created",
+      "x-ratelimit-limit": "5000",
+      "x-ratelimit-remaining": "4993",
+      "x-ratelimit-reset": "1398582683",
+      "cache-control": "private, max-age=60, s-maxage=60",
+      "etag": "\"d4ee4335b1104447a0c5cdbde651d7b3\"",
+      "location": "https://api.github.com/repos/twolfsontest/Spoon-Knife/issues/comments/41489757",
+      "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+      "x-github-media-type": "github.beta; format=json",
+      "x-xss-protection": "1; mode=block",
+      "x-frame-options": "deny",
+      "content-security-policy": "default-src 'none'",
+      "content-length": "1312",
+      "access-control-allow-credentials": "true",
+      "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+      "access-control-allow-origin": "*",
+      "x-github-request-id": "4C152A85:287F:7B363A:535CA918",
+      "strict-transport-security": "max-age=31536000",
+      "x-content-type-options": "nosniff"
+    },
+    "trailers": {},
+    "statusCode": 201,
+    "bodyEncoding": "utf8",
+    "body": "{\"url\":\"https://api.github.com/repos/twolfsontest/Spoon-Knife/issues/comments/41489757\",\"html_url\":\"https://github.com/twolfsontest/Spoon-Knife/issues/1#issuecomment-41489757\",\"issue_url\":\"https://api.github.com/repos/twolfsontest/Spoon-Knife/issues/1\",\"id\":41489757,\"user\":{\"login\":\"twolfsontest\",\"id\":7418145,\"avatar_url\":\"https://avatars.githubusercontent.com/u/7418145?\",\"gravatar_id\":\"f11ffa3877a572c726189a8c0c5be1f2\",\"url\":\"https://api.github.com/users/twolfsontest\",\"html_url\":\"https://github.com/twolfsontest\",\"followers_url\":\"https://api.github.com/users/twolfsontest/followers\",\"following_url\":\"https://api.github.com/users/twolfsontest/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/twolfsontest/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/twolfsontest/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/twolfsontest/subscriptions\",\"organizations_url\":\"https://api.github.com/users/twolfsontest/orgs\",\"repos_url\":\"https://api.github.com/users/twolfsontest/repos\",\"events_url\":\"https://api.github.com/users/twolfsontest/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/twolfsontest/received_events\",\"type\":\"User\",\"site_admin\":false},\"created_at\":\"2014-04-27T06:52:08Z\",\"updated_at\":\"2014-04-27T06:52:08Z\",\"body\":\"Oh hai\"}"
+  }
+}

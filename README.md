@@ -386,6 +386,50 @@ var RepoModel = GithubModel.extend({
 });
 ```
 
+### Semi-consistent methods
+If your method scheme is usually consistent but needs some one-off overrides, dynamically generated keys are a good solution.
+
+```js
+// Interacting with issue comments via the GitHub module
+var GithubModel = ApiModel.extend({
+  callApiClient: function (methodKey, options, cb) {
+    // Prepare headers with data
+    var params = _.clone(options.data) || {};
+    if (options.headers) {
+      params.headers = options.headers;
+    }
+
+    // Resolve the key via `updateKey`/`createKey`
+    var method = _.result(this, methodKey + 'Key');
+    return this.apiClient[this.resourceName][method](params, cb);
+  },
+  resourceClass: '',
+  createKey: function () {
+    return 'create' + this.resourceClass;
+  },
+  updateKey: function () {
+    return 'update' + this.resourceClass;
+  },
+  readKey: function () {
+    return 'get' + this.resourceClass;
+  },
+  deleteKey: function () {
+    return 'delete' + this.resourceClass;
+  }
+});
+var CommentModel = GithubModel.extend({
+  resourceName: 'issues',
+  resourceClass: 'Comment',
+  // Override `update` action
+  updateKey: 'editComment'
+  // Keys will be createComment, editComment, getComment, deleteComment
+});
+var RepoModel = GithubModel.extend({
+  resourceName: 'repos'
+  // Keys will be create, update, get, delete
+});
+```
+
 ### Bloated `callApiClient` logic
 If you are performng multiple actions in your `callApiClient` (e.g. add `id` in `update`, mark `deleted` attribute on `delete`), you can break that down by invoking methods which are overwritable on a one-off basis.
 

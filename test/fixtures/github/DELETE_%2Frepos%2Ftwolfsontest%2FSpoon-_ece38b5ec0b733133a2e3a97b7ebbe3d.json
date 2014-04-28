@@ -1,0 +1,45 @@
+{
+  "request": {
+    "httpVersion": "1.1",
+    "headers": {
+      "host": "localhost",
+      "content-length": "0",
+      "authorization": "Basic dHdvbGZzb250ZXN0OnBhc3N3b3JkMTIzNA==",
+      "user-agent": "NodeJS HTTP Client",
+      "accept": "application/vnd.github.beta+json",
+      "connection": "keep-alive"
+    },
+    "trailers": {},
+    "method": "DELETE",
+    "url": "/repos/twolfsontest/Spoon-Knife/issues/comments/41489757",
+    "bodyEncoding": "utf8",
+    "body": ""
+  },
+  "response": {
+    "httpVersion": "1.1",
+    "headers": {
+      "server": "GitHub.com",
+      "date": "Sun, 27 Apr 2014 07:08:44 GMT",
+      "status": "204 No Content",
+      "x-ratelimit-limit": "5000",
+      "x-ratelimit-remaining": "4992",
+      "x-ratelimit-reset": "1398582683",
+      "x-github-media-type": "github.beta; format=json",
+      "x-xss-protection": "1; mode=block",
+      "x-frame-options": "deny",
+      "content-security-policy": "default-src 'none'",
+      "access-control-allow-credentials": "true",
+      "access-control-expose-headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+      "access-control-allow-origin": "*",
+      "x-github-request-id": "4C152A85:6406:1205C9:535CACFC",
+      "strict-transport-security": "max-age=31536000",
+      "x-content-type-options": "nosniff",
+      "vary": "Accept-Encoding",
+      "x-served-by": "88d924ed861736d2749ce1a55766cb53"
+    },
+    "trailers": {},
+    "statusCode": 204,
+    "bodyEncoding": "utf8",
+    "body": ""
+  }
+}

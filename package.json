@@ -1,0 +1,50 @@
+{
+  "name": "backbone-api-client",
+  "description": "Backbone mixin built for interacting with API clients",
+  "version": "0.1.0",
+  "homepage": "https://github.com/uber/backbone-api-client",
+  "author": {
+    "name": "Todd Wolfson",
+    "email": "todd@twolfson.com",
+    "url": "http://twolfson.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/uber/backbone-api-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uber/backbone-api-client/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/uber/backbone-api-client/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/backbone-api-client",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt jshint && mocha"
+  },
+  "dependencies": {
+    "underscore": "~1.6.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.11.0",
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-watch": "~0.4.0",
+    "github": "~0.1.16",
+    "eight-track": "~2.0.0",
+    "backbone": "~1.1.2",
+    "chai": "~1.9.1",
+    "grunt-cli": "~0.1.13"
+  },
+  "keywords": [
+    "backbone",
+    "api client",
+    "server"
+  ]
+}
